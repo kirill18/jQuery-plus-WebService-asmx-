@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DBContacts" Class="MyDCDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\DBContacts.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DBContactsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Contacts" Member="Contacts">
+    <Type Name="Contacts">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SecondName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ThirdName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdTelephone" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Telephone_Contacts" Member="Telephone" ThisKey="IdTelephone" OtherKey="Id" Type="Telephone" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Telephone" Member="Telephone">
+    <Type Name="Telephone">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Telephone" Member="Telephone1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Telephone_Contacts" Member="Contacts" ThisKey="Id" OtherKey="IdTelephone" Type="Contacts" />
+    </Type>
+  </Table>
+</Database>

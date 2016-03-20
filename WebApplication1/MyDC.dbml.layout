@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="MyDC">
+  <DataContextMoniker Name="/MyDCDataContext" />
+  <nestedChildShapes>
+    <classShape Id="aed85375-da4b-457f-abd7-0dd281a5661a" absoluteBounds="3.625, 1.375, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/MyDCDataContext/Contacts" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7a5c449e-1573-4ec2-b410-acf242cd71fd" absoluteBounds="3.64, 1.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1702d3f9-3d85-4048-8f36-1a60cd32a4cf" absoluteBounds="7.25, 2.25, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/MyDCDataContext/Telephone" />
+      <nestedChildShapes>
+        <elementListCompartment Id="36120719-3fbc-4ab5-aa89-0a536d47bb63" absoluteBounds="7.265, 2.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.25 : 2.69794840494792); (5.625 : 2.69794840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MyDCDataContext/Telephone/Telephone_Contacts" />
+      <nodes>
+        <classShapeMoniker Id="1702d3f9-3d85-4048-8f36-1a60cd32a4cf" />
+        <classShapeMoniker Id="aed85375-da4b-457f-abd7-0dd281a5661a" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
