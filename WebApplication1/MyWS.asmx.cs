@@ -21,7 +21,29 @@ namespace WebApplication1
     [System.Web.Script.Services.ScriptService]
     public class MyWS : System.Web.Services.WebService
     {
-        private readonly MyDC2DataContext dc2 = new MyDC2DataContext();   
+        private readonly MyDC2DataContext dc2 = new MyDC2DataContext();
+
+        [WebMethod]
+        public int CountContactsRecordHtml()
+        {
+            var temp = from result in dc2.Contacts
+                       select result;
+            return temp.Count();
+        }
+
+        [WebMethod]
+        public void GetNewContacts(int Id=1)
+        {
+            List<DBContact> list = new List<DBContact>();
+            int count = CountContactsRecordHtml();
+            for (int i = Id; i <= count; i++)
+            {
+                list.Add(GetContactById(i.ToString()));
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Write(js.Serialize(list));
+        }
+
         [WebMethod]
         public DBContact GetContactById(string contactId)
         {

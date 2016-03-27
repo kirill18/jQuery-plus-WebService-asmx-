@@ -6,21 +6,36 @@
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <script src="/Scripts/jquery-2.2.1.min.js"></script>
     <script type="text/javascript">
+        var conId=1;
+        $.ajax({
+            url: 'MyWS.asmx/GetNewContacts',
+            data: { Id: conId },
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+                var tables = $('#rokki tbody');
+                $(data).each(function (index, emp) {
+                    tables.append('<tr><td>' + emp.FirstName + '</td><td>' + emp.SecondName + '</td><td>' + emp.ThirdName + '</td><td>' + emp.IdTelephone
+                        + '</td><td>' + emp.Address + '</td></tr>');
+                });
+            }
+        });
+
         $(document).ready(function() {
             $('#ButtomGetContact').click(function() {
                 var conId = $('#txtId').val();
                 $.ajax({
-                    url: 'MyWS.asmx/GetContactById',
-                    data: { ContactId: conId },
+                    url: 'MyWS.asmx/GetNewContacts',
+                    data: { Id: conId },
                     method: 'post',
-                    dataType: 'xml',
-                    success:function(data) {
-                        var jqueryXml = $(data);
-                        $('#txtFirstName').val(jqueryXml.find('FirstName').text());
-                        $('#txtSecondName').val(jqueryXml.find('SecondName').text());
-                        $('#txtThirdName').val(jqueryXml.find('ThirdName').text());
-                        $('#txtTelephone').val(jqueryXml.find('IdTelephone').text());
-                        $('#txtAddress').val(jqueryXml.find('Address').text());
+                    dataType: 'json',
+                    success: function (data) {
+                        var tables2 = $('#rokki tbody');
+                        tables2.find("tr").remove();
+                        $(data).each(function (index, emp) {
+                            tables2.append('<tr><td>' + emp.FirstName + '</td><td>' + emp.SecondName + '</td><td>' + emp.ThirdName + '</td><td>' + emp.IdTelephone
+                                + '</td><td>' + emp.Address + '</td></tr>');
+                        });
                     }
                 });
             });
@@ -28,31 +43,27 @@
     </script>
 </head>
 <body>
-    <form class="form-inline">
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-addon">Id</div>
-                <input type="text" class="form-control" id="txtId"  placeholder="Enter Id" >
-            </div>
+<form class="form-inline">
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">Id</div>
+            <input type="text" class="form-control" id="txtId" placeholder="Enter Id">
         </div>
-        <input type="button" id="ButtomGetContact" class="btn btn-primary" value="Get Contact"/>
-    </form>
+    </div>
+    <input type="button" id="ButtomGetContact" class="btn btn-primary" value="Get Contact"/>
+</form>
 <form>
-    <table class="table table-responsive">
+    <table class="table table-responsive" id="rokki">
         <thead>
         <tr><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Телефон</th><th>Адрес</th></tr>
         </thead>
-        <tbody>
-        <tr>
-            <td ><input type="text" class="form-control" id="txtFirstName" /></td>
-            <td ><input type="text" class="form-control" id="txtSecondName" /></td>
-            <td ><input type="text" class="form-control" id="txtThirdName" /></td>
-            <td ><input type="text" class="form-control" id="txtTelephone"/></td>
-            <td><input type="text" class="form-control" id="txtAddress" /></td>
-        </tr>
-        </tbody>
+        <tbody></tbody>
     </table>
 </form>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+<script>
+</script>
+
+<!--GetNewContacts(int)-->

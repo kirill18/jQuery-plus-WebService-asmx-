@@ -94,6 +94,7 @@
     <Content Include="bootstrap\js\npm.js" />
     <Content Include="Index.html" />
     <Content Include="MyWS.asmx" />
+    <Content Include="Scripts\MyJS.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
