@@ -5,53 +5,8 @@
     <title>Test Task</title>
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <script src="/Scripts/jquery-2.2.1.min.js"></script>
-    <script type="text/javascript">
-        var conId=1;
-        $.ajax({
-            url: 'MyWS.asmx/GetNewContacts',
-            data: { Id: conId },
-            method: 'post',
-            dataType: 'json',
-            success: function (data) {
-                var tables = $('#rokki tbody');
-                $(data).each(function (index, emp) {
-                    tables.append('<tr><td>' + emp.FirstName + '</td><td>' + emp.SecondName + '</td><td>' + emp.ThirdName + '</td><td>' + emp.IdTelephone
-                        + '</td><td>' + emp.Address + '</td></tr>');
-                });
-            }
-        });
-
-        $(document).ready(function() {
-            $('#ButtomGetContact').click(function() {
-                var conId = $('#txtId').val();
-                $.ajax({
-                    url: 'MyWS.asmx/GetNewContacts',
-                    data: { Id: conId },
-                    method: 'post',
-                    dataType: 'json',
-                    success: function (data) {
-                        var tables2 = $('#rokki tbody');
-                        tables2.find("tr").remove();
-                        $(data).each(function (index, emp) {
-                            tables2.append('<tr><td>' + emp.FirstName + '</td><td>' + emp.SecondName + '</td><td>' + emp.ThirdName + '</td><td>' + emp.IdTelephone
-                                + '</td><td>' + emp.Address + '</td></tr>');
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 </head>
 <body>
-<form class="form-inline">
-    <div class="form-group">
-        <div class="input-group">
-            <div class="input-group-addon">Id</div>
-            <input type="text" class="form-control" id="txtId" placeholder="Enter Id">
-        </div>
-    </div>
-    <input type="button" id="ButtomGetContact" class="btn btn-primary" value="Get Contact"/>
-</form>
 <form>
     <table class="table table-responsive" id="rokki">
         <thead>
@@ -63,7 +18,27 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
-<script>
+<script type="text/javascript">
+    var conId = 1;
+    function name(parameters) {
+        $.ajax({
+            url: 'MyWS.asmx/GetNewContacts',
+            data: { Id: conId },
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+                var tables = $('#rokki tbody');
+                tables.find("tr").remove();
+                $(data).each(function (index, emp) {
+                    tables.append('<tr><td>' + emp.FirstName + '</td><td>' + emp.SecondName + '</td><td>' + emp.ThirdName + '</td><td>' + emp.IdTelephone
+                        + '</td><td>' + emp.Address + '</td></tr>');
+                });
+            }
+        });
+    }
+    setInterval(name, 1000);
 </script>
+
+
 
 <!--GetNewContacts(int)-->
